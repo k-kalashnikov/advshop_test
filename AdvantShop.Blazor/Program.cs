@@ -1,5 +1,5 @@
 using AdvantShop.Blazor.Data;
-using AdvantShop.Blazor.Services;
+using AdvantShop.Blazor.Hubs;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.EntityFrameworkCore;
@@ -10,8 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services
-    .AddDbContext<ApplicationDbContext>()
-    .AddTransient<IMessengerService, MessengerService>();
+    .AddDbContext<ApplicationDbContext>();
 
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();

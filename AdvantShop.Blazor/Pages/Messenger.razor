@@ -1,10 +1,8 @@
 ﻿@page "/messenger"
 @using AdvantShop.Blazor.Models;
-@using AdvantShop.Blazor.Services;
 @using Microsoft.AspNetCore.SignalR.Client;
 @using System.Linq;
 
-@inject IMessengerService Messager
 @inject NavigationManager NavigationManager
 
 @if (!IsLogin && !IsRoomReady)
@@ -164,6 +162,8 @@ else
     private async Task EnterToRoom(long roomId)
     {
         RoomId = roomId;
+
+        await HubConnection.InvokeAsync<IEnumerable<ChatMessage>>("EnterToRoom", roomId);
 
         ChatMessages = (await HubConnection.InvokeAsync<IEnumerable<ChatMessage>>("GetRoomMessages", roomId))
             .Select(m => new MessageViewModel(m.SendBy, m.Message, m.SendBy.Equals(Username)))

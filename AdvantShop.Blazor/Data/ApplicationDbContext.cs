@@ -21,5 +21,12 @@ namespace AdvantShop.Blazor.Data
         public DbSet<ChatRoom> ChatRooms { get; set; }
         public DbSet<ChatMessage> ChatMessages { get; set; }
         public DbSet<ChatUser> ChatUsers { get; set; }
+
+        public DbSet<ChatRoomUser> ChatRoomUsers { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ChatRoomUser>().HasKey(vf => new { vf.RoomId, vf.UserName});
+        }
     }
 }

@@ -3,6 +3,7 @@ using System;
 using AdvantShop.Blazor.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AdvantShop.Blazor.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230308153036_Add_Users")]
+    partial class Add_Users
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.3");
@@ -57,19 +60,6 @@ namespace AdvantShop.Blazor.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ChatRooms");
-                });
-
-            modelBuilder.Entity("AdvantShop.Blazor.Models.ChatRoomUser", b =>
-                {
-                    b.Property<long>("RoomId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("UserName")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("RoomId", "UserName");
-
-                    b.ToTable("ChatRoomUsers");
                 });
 
             modelBuilder.Entity("AdvantShop.Blazor.Models.ChatUser", b =>
